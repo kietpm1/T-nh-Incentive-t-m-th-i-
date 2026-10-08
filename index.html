@@ -2,743 +2,524 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Máy tính thưởng Incentive</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tính thưởng Incentive VPBank</title>
 
-  <style>
-    :root {
-      --primary: #0756b9;
-      --primary-dark: #073b80;
-      --background: #f2f6fc;
-      --text: #172b4d;
-      --muted: #64748b;
-      --border: #dce5f1;
-      --success: #087443;
-      --danger: #c62828;
-    }
+<style>
+:root {
+  --green: #08783f;
+  --green2: #159653;
+  --navy: #17345b;
+  --bg: #f1f7f3;
+  --line: #dce8e0;
+}
+* { box-sizing: border-box; }
 
-    * {
-      box-sizing: border-box;
-    }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: #20352a;
+  font-family: Arial, sans-serif;
+}
 
-    body {
-      margin: 0;
-      padding: 24px 14px;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--background);
-      color: var(--text);
-    }
+header {
+  background: linear-gradient(120deg, #075e35, #18a05a);
+  color: white;
+  padding: 25px 18px;
+}
+.header-inner, main {
+  max-width: 1100px;
+  margin: auto;
+}
+.brand {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+h1 { font-size: 30px; margin: 10px 0; }
+header p { margin: 0; color: #e4f8eb; font-size: 14px; }
 
-    .container {
-      width: 100%;
-      max-width: 760px;
-      margin: 0 auto;
-    }
+main { padding: 20px 14px 35px; }
 
-    .header {
-      background: linear-gradient(135deg, #073b80, #0878df);
-      color: white;
-      padding: 28px 22px;
-      border-radius: 18px;
-      text-align: center;
-      box-shadow: 0 8px 24px rgba(7, 59, 128, 0.16);
-    }
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
 
-    .header h1 {
-      margin: 0 0 10px;
-      font-size: 25px;
-      line-height: 1.35;
-    }
+.card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 5px 20px #123a2010;
+}
 
-    .header p {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.6;
-      opacity: 0.92;
-    }
+h2 {
+  color: var(--green);
+  font-size: 18px;
+  margin: 0 0 17px;
+}
+h3 {
+  color: var(--navy);
+  font-size: 14px;
+  margin: 0 0 12px;
+}
 
-    .card {
-      margin-top: 20px;
-      padding: 24px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      box-shadow: 0 5px 18px rgba(31, 55, 90, 0.05);
-    }
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+}
 
-    .section-title {
-      margin: 0 0 20px;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--primary-dark);
-    }
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.full { grid-column: 1 / -1; }
 
-    .form-group {
-      margin-bottom: 20px;
-    }
+label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #53685a;
+}
 
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
-      font-weight: 700;
-    }
+input, select {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #cbdacf;
+  border-radius: 9px;
+  background: #fbfdfb;
+  font-size: 14px;
+  outline: none;
+}
 
-    input,
-    select {
-      width: 100%;
-      min-height: 48px;
-      padding: 12px 14px;
-      border: 1px solid #cbd7e6;
-      border-radius: 10px;
-      background: #fbfdff;
-      color: var(--text);
-      font-size: 16px;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
+input:focus, select:focus {
+  border-color: var(--green2);
+  box-shadow: 0 0 0 3px #15965318;
+}
 
-    input:focus,
-    select:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(7, 86, 185, 0.10);
-      background: white;
-    }
+.stage {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 14px;
+  background: #fbfdfb;
+}
 
-    input::placeholder {
-      color: #94a3b8;
-    }
+.stage-title {
+  font-weight: bold;
+  color: var(--navy);
+  font-size: 13px;
+  margin-bottom: 12px;
+}
 
-    .hint {
-      margin-top: 7px;
-      font-size: 12px;
-      line-height: 1.5;
-      color: var(--muted);
-    }
+.hint {
+  font-size: 11px;
+  color: #718078;
+  line-height: 1.6;
+  margin-top: 8px;
+}
 
-    .button-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 24px;
-    }
+button {
+  padding: 13px 16px;
+  border: 0;
+  border-radius: 9px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
 
-    button {
-      min-height: 48px;
-      padding: 12px 15px;
-      border: none;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.15s, opacity 0.15s;
-    }
+.primary {
+  background: var(--green);
+  color: white;
+  flex: 1;
+}
+.secondary {
+  background: #eaf3ed;
+  color: var(--green);
+}
 
-    button:active {
-      transform: scale(0.98);
-    }
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
 
-    .btn-calculate {
-      grid-column: 1 / -1;
-      color: white;
-      background: linear-gradient(135deg, #0756b9, #0878df);
-      box-shadow: 0 5px 12px rgba(7, 86, 185, 0.18);
-    }
+.big {
+  background: linear-gradient(130deg, #075f35, #159653);
+  border-radius: 12px;
+  padding: 20px;
+  color: white;
+}
+.caption { font-size: 12px; }
+.amount {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 900;
+  margin: 10px 0;
+  overflow-wrap: anywhere;
+}
 
-    .btn-reset {
-      color: #334155;
-      background: #e9eef5;
-    }
+.metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 14px 0;
+}
 
-    .btn-copy {
-      color: white;
-      background: var(--success);
-    }
+.metric {
+  background: #f3f8f4;
+  border: 1px solid #e0ebe3;
+  border-radius: 10px;
+  padding: 13px;
+}
+.metric span {
+  display: block;
+  color: #63776a;
+  font-size: 11px;
+  margin-bottom: 7px;
+}
+.metric strong {
+  font-size: 17px;
+  color: var(--navy);
+  overflow-wrap: anywhere;
+}
 
-    .result-card {
-      display: none;
-      margin-top: 20px;
-      padding: 24px;
-      border: 1px solid #b9e4ce;
-      border-radius: 16px;
-      background: #f2fbf6;
-    }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+th, td {
+  padding: 11px 8px;
+  border-bottom: 1px solid #e5ede7;
+  text-align: left;
+  line-height: 1.5;
+}
+th {
+  background: #eff7f1;
+  color: #365a43;
+}
+td:last-child, th:last-child { text-align: right; }
 
-    .result-card.show {
-      display: block;
-    }
+.total-row td {
+  font-weight: bold;
+  color: var(--green);
+  background: #f5faf6;
+}
 
-    .result-title {
-      margin: 0 0 16px;
-      font-size: 19px;
-      color: var(--success);
-    }
+.note {
+  padding: 12px;
+  background: #fff8e7;
+  border: 1px solid #f1e2b4;
+  border-radius: 9px;
+  color: #76591b;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 14px;
+}
 
-    .result-total {
-      margin-bottom: 22px;
-      padding: 20px 12px;
-      border-radius: 12px;
-      text-align: center;
-      background: white;
-      border: 1px solid #cfe8da;
-    }
+.formula {
+  background: #f5f9f6;
+  padding: 12px;
+  border-radius: 9px;
+  font-size: 12px;
+  line-height: 1.7;
+  margin-top: 12px;
+}
 
-    .result-total .caption {
-      margin-bottom: 8px;
-      color: var(--muted);
-      font-size: 13px;
-    }
+footer {
+  text-align: center;
+  color: #718078;
+  font-size: 11px;
+  line-height: 1.7;
+  margin-top: 20px;
+}
 
-    .result-total .amount {
-      color: var(--success);
-      font-size: clamp(26px, 6vw, 36px);
-      font-weight: 800;
-      overflow-wrap: anywhere;
-    }
-
-    .result-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 12px 0;
-      border-bottom: 1px solid #dceee3;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .result-row:last-child {
-      border-bottom: none;
-    }
-
-    .result-row span:first-child {
-      color: #475569;
-    }
-
-    .result-row strong {
-      text-align: right;
-      overflow-wrap: anywhere;
-    }
-
-    .formula {
-      margin-top: 16px;
-      padding: 13px;
-      border-radius: 10px;
-      background: white;
-      color: #334155;
-      font-size: 13px;
-      line-height: 1.7;
-      overflow-wrap: anywhere;
-    }
-
-    .notice {
-      margin-top: 16px;
-      padding: 13px;
-      border-radius: 10px;
-      background: #fff7e6;
-      color: #854d0e;
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    .error {
-      display: none;
-      margin-top: 14px;
-      padding: 12px;
-      border-radius: 9px;
-      color: var(--danger);
-      background: #fff1f2;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .error.show {
-      display: block;
-    }
-
-    .footer {
-      padding: 22px 8px 8px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.7;
-      text-align: center;
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 14px 10px;
-      }
-
-      .header {
-        padding: 24px 16px;
-      }
-
-      .header h1 {
-        font-size: 22px;
-      }
-
-      .card,
-      .result-card {
-        padding: 18px 15px;
-      }
-
-      .result-row {
-        gap: 10px;
-      }
-    }
-  </style>
+@media (max-width: 760px) {
+  .layout { grid-template-columns: 1fr; }
+  .card { padding: 15px; }
+  h1 { font-size: 25px; }
+}
+@media (max-width: 390px) {
+  .grid { grid-template-columns: 1fr; }
+  .full { grid-column: auto; }
+  .actions { flex-direction: column; }
+}
+</style>
 </head>
 
 <body>
-  <main class="container">
+<header>
+  <div class="header-inner">
+    <div class="brand">VPBANK · CÔNG CỤ TÍNH THAM KHẢO</div>
+    <h1>TÍNH THƯỞNG INCENTIVE</h1>
+    <p>KHCN tín chấp nợ muộn · Chính sách tham khảo 08/2026–12/2026</p>
+  </div>
+</header>
 
-    <header class="header">
-      <h1>🧮 MÁY TÍNH THƯỞNG INCENTIVE</h1>
-      <p>Công cụ tính thưởng dự kiến theo số thu, DPD, giai đoạn xử lý và KPI.</p>
-    </header>
+<main>
+<div class="layout">
 
-    <section class="card">
-      <h2 class="section-title">📋 Thông tin tính thưởng</h2>
+<section>
+<div class="card">
+<h2>01 · Nhập thông tin</h2>
 
-      <form id="rewardForm" novalidate>
+<div class="grid">
+  <div class="field">
+    <label for="kpi">Tỷ lệ hoàn thành KPI (%)</label>
+    <input id="kpi" type="number" min="0" step="0.1" value="150">
+  </div>
 
-        <div class="form-group">
-          <label for="amount">Số thu tính incentive (VNĐ)</label>
-          <input
-            type="text"
-            id="amount"
-            inputmode="numeric"
-            autocomplete="off"
-            placeholder="Ví dụ: 100,000,000"
-            required
-          >
-          <div class="hint">
-            Nhập số tiền, hệ thống tự thêm dấu phẩy phân cách hàng nghìn.
-          </div>
-        </div>
+  <div class="field">
+    <label for="dpd">Nhóm DPD</label>
+    <select id="dpd">
+      <option value="150">DPD ≥ 150 ngày</option>
+      <option value="540">DPD trên 150 – đến 540 ngày</option>
+      <option value="541" selected>DPD trên 540 ngày</option>
+    </select>
+  </div>
+</div>
 
-        <div class="form-group">
-          <label for="dpd">Nhóm DPD</label>
-          <select id="dpd" required>
-            <option value="">-- Chọn nhóm DPD --</option>
-            <option value="under150">DPD dưới 150</option>
-            <option value="150to540">DPD từ 150 đến 540</option>
-            <option value="over540">DPD trên 540</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="stage">Giai đoạn thu nợ</label>
-          <select id="stage" required>
-            <option value="">-- Chọn giai đoạn --</option>
-            <option value="before">Trước xử lý / thu lý</option>
-            <option value="after">Sau xử lý / thu lý</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="kpi">Tỷ lệ hoàn thành KPI (%)</label>
-          <input
-            type="number"
-            id="kpi"
-            min="0"
-            max="1000"
-            step="any"
-            placeholder="Ví dụ: 100"
-            required
-          >
-          <div class="hint">
-            Nhập số phần trăm, ví dụ KPI 110% thì nhập 110.
-          </div>
-        </div>
-
-        <div class="button-group">
-          <button type="button" class="btn-calculate" id="calculateBtn">
-            🧮 TÍNH THƯỞNG DỰ KIẾN
-          </button>
-
-          <button type="button" class="btn-reset" id="resetBtn">
-            ↻ Làm mới
-          </button>
-
-          <button type="button" class="btn-copy" id="copyBtn">
-            📋 Sao chép kết quả
-          </button>
-        </div>
-
-        <div class="error" id="errorBox" role="alert"></div>
-      </form>
-    </section>
-
-    <section class="result-card" id="resultCard" aria-live="polite">
-      <h2 class="result-title">✅ Kết quả tính thưởng</h2>
-
-      <div class="result-total">
-        <div class="caption">TỔNG THƯỞNG INCENTIVE DỰ KIẾN</div>
-        <div class="amount" id="totalReward">0 VNĐ</div>
-      </div>
-
-      <div class="result-row">
-        <span>Số thu tính incentive</span>
-        <strong id="resultAmount">0 VNĐ</strong>
-      </div>
-
-      <div class="result-row">
-        <span>Nhóm DPD</span>
-        <strong id="resultDpd">—</strong>
-      </div>
-
-      <div class="result-row">
-        <span>Giai đoạn thu nợ</span>
-        <strong id="resultStage">—</strong>
-      </div>
-
-      <div class="result-row">
-        <span>Tỷ lệ incentive</span>
-        <strong id="resultRate">0%</strong>
-      </div>
-
-      <div class="result-row">
-        <span>Thưởng cơ bản</span>
-        <strong id="baseReward">0 VNĐ</strong>
-      </div>
-
-      <div class="result-row">
-        <span>Tỷ lệ KPI</span>
-        <strong id="resultKpi">0%</strong>
-      </div>
-
-      <div class="result-row">
-        <span>Hệ số KPI áp dụng</span>
-        <strong id="resultFactor">—</strong>
-      </div>
-
-      <div class="formula" id="formulaBox"></div>
-    </section>
-
-    <div class="notice">
-      <strong>Lưu ý:</strong> Kết quả là số tiền ước tính theo các mức tỷ lệ
-      và hệ số đang cài đặt trong công cụ. Vui lòng đối chiếu quy định
-      incentive chính thức trước khi sử dụng.
+<div class="stage">
+  <div class="stage-title">GIAI ĐOẠN 1 · TRƯỚC THU LÝ</div>
+  <div class="grid">
+    <div class="field full">
+      <label for="amount1">Số thu tính incentive (VNĐ)</label>
+      <input id="amount1" inputmode="numeric" value="200,000,000">
     </div>
-
-    <footer class="footer">
-      Công cụ hỗ trợ tính toán nội bộ · Vui lòng kiểm tra dữ liệu trước khi tính.
-    </footer>
-
-  </main>
-
-  <script>
-    "use strict";
-
-    // =====================================================
-    // 1. CẤU HÌNH TỶ LỆ INCENTIVE
-    // Kiểm tra và thay đổi nếu quy định chính thức khác.
-    // =====================================================
-
-    const INCENTIVE_RATES = {
-      under150: {
-        before: 0.016,
-        after: 0.020
-      },
-      "150to540": {
-        before: 0.048,
-        after: 0.070
-      },
-      over540: {
-        before: 0.055,
-        after: 0.080
-      }
-    };
-
-    // =====================================================
-    // 2. TÊN HIỂN THỊ
-    // =====================================================
-
-    const DPD_LABELS = {
-      under150: "DPD dưới 150",
-      "150to540": "DPD từ 150 đến 540",
-      over540: "DPD trên 540"
-    };
-
-    const STAGE_LABELS = {
-      before: "Trước xử lý / thu lý",
-      after: "Sau xử lý / thu lý"
-    };
-
-    // =====================================================
-    // 3. LẤY PHẦN TỬ HTML
-    // =====================================================
-
-    const amountInput = document.getElementById("amount");
-    const dpdInput = document.getElementById("dpd");
-    const stageInput = document.getElementById("stage");
-    const kpiInput = document.getElementById("kpi");
-
-    const calculateBtn = document.getElementById("calculateBtn");
-    const resetBtn = document.getElementById("resetBtn");
-    const copyBtn = document.getElementById("copyBtn");
-
-    const errorBox = document.getElementById("errorBox");
-    const resultCard = document.getElementById("resultCard");
-
-    let lastResultText = "";
-
-    // =====================================================
-    // 4. ĐỊNH DẠNG TIỀN VNĐ
-    // =====================================================
-
-    function formatMoney(value) {
-      return Math.round(value).toLocaleString("en-US") + " VNĐ";
-    }
-
-    function formatNumber(value) {
-      return Math.round(value).toLocaleString("en-US");
-    }
-
-    // =====================================================
-    // 5. TỰ ĐỘNG THÊM DẤU PHẨY KHI NHẬP SỐ THU
-    // Ví dụ 1000000 => 1,000,000
-    // Không tự tính thưởng khi nhập.
-    // =====================================================
-
-    amountInput.addEventListener("input", function () {
-      const digits = this.value.replace(/\D/g, "");
-
-      if (digits === "") {
-        this.value = "";
-        return;
-      }
-
-      // Bỏ số 0 thừa ở đầu nhưng vẫn giữ lại số 0 đơn lẻ.
-      const normalized = digits.replace(/^0+(?=\d)/, "");
-
-      this.value = normalized.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-      // Không tự cập nhật kết quả.
-    });
-
-    // =====================================================
-    // 6. HỆ SỐ KPI
-    // =====================================================
-
-    function getKpiFactor(kpi) {
-      if (kpi >= 150) return 1.20;
-      if (kpi >= 120) return 1.10;
-      if (kpi >= 100) return 1.00;
-      if (kpi >= 90) return 0.60;
-      if (kpi >= 40) return 0.50;
-
-      return null;
-    }
-
-    // =====================================================
-    // 7. HIỂN THỊ LỖI
-    // =====================================================
-
-    function showError(message) {
-      errorBox.textContent = message;
-      errorBox.classList.add("show");
-    }
-
-    function clearError() {
-      errorBox.textContent = "";
-      errorBox.classList.remove("show");
-    }
-
-    // =====================================================
-    // 8. TÍNH THƯỞNG KHI BẤM NÚT
-    // =====================================================
-
-    function calculateReward() {
-      clearError();
-
-      // Loại dấu phẩy trước khi chuyển thành số.
-      const rawAmount = amountInput.value.replace(/,/g, "").trim();
-      const amount = Number(rawAmount);
-
-      const dpd = dpdInput.value;
-      const stage = stageInput.value;
-      const kpi = Number(kpiInput.value);
-
-      if (rawAmount === "" || !Number.isFinite(amount) || amount <= 0) {
-        showError("Vui lòng nhập số thu tính incentive lớn hơn 0.");
-        amountInput.focus();
-        return;
-      }
-
-      if (!dpd) {
-        showError("Vui lòng chọn nhóm DPD.");
-        dpdInput.focus();
-        return;
-      }
-
-      if (!stage) {
-        showError("Vui lòng chọn giai đoạn thu nợ.");
-        stageInput.focus();
-        return;
-      }
-
-      if (
-        kpiInput.value.trim() === "" ||
-        !Number.isFinite(kpi) ||
-        kpi < 0 ||
-        kpi > 1000
-      ) {
-        showError("Vui lòng nhập tỷ lệ KPI hợp lệ từ 0 đến 1000.");
-        kpiInput.focus();
-        return;
-      }
-
-      const rate = INCENTIVE_RATES[dpd][stage];
-
-      if (typeof rate !== "number") {
-        showError("Không tìm thấy tỷ lệ incentive phù hợp.");
-        return;
-      }
-
-      const factor = getKpiFactor(kpi);
-
-      if (factor === null) {
-        showError(
-          "Theo hệ số hiện tại, KPI dưới 40% chưa có hệ số thưởng. " +
-          "Vui lòng kiểm tra quy định chính thức."
-        );
-        return;
-      }
-
-      const baseReward = amount * rate;
-      const totalReward = baseReward * factor;
-
-      // Hiển thị kết quả.
-      document.getElementById("totalReward").textContent =
-        formatMoney(totalReward);
-
-      document.getElementById("resultAmount").textContent =
-        formatMoney(amount);
-
-      document.getElementById("resultDpd").textContent =
-        DPD_LABELS[dpd];
-
-      document.getElementById("resultStage").textContent =
-        STAGE_LABELS[stage];
-
-      document.getElementById("resultRate").textContent =
-        (rate * 100).toLocaleString("vi-VN", {
-          maximumFractionDigits: 3
-        }) + "%";
-
-      document.getElementById("baseReward").textContent =
-        formatMoney(baseReward);
-
-      document.getElementById("resultKpi").textContent =
-        kpi.toLocaleString("vi-VN") + "%";
-
-      document.getElementById("resultFactor").textContent =
-        factor.toLocaleString("vi-VN", {
-          maximumFractionDigits: 2
-        }) + " lần";
-
-      document.getElementById("formulaBox").textContent =
-        "Cách tính: " +
-        formatNumber(amount) +
-        " × " +
-        (rate * 100).toLocaleString("vi-VN", {
-          maximumFractionDigits: 3
-        }) +
-        "% = " +
-        formatNumber(baseReward) +
-        " VNĐ thưởng cơ bản; sau đó × hệ số KPI " +
-        factor.toLocaleString("vi-VN", {
-          maximumFractionDigits: 2
-        }) +
-        " = " +
-        formatNumber(totalReward) +
-        " VNĐ thưởng dự kiến.";
-
-      resultCard.classList.add("show");
-
-      lastResultText =
-        "KẾT QUẢ TÍNH THƯỞNG INCENTIVE\n" +
-        "Số thu tính incentive: " + formatMoney(amount) + "\n" +
-        "Nhóm DPD: " + DPD_LABELS[dpd] + "\n" +
-        "Giai đoạn thu nợ: " + STAGE_LABELS[stage] + "\n" +
-        "Tỷ lệ incentive: " + (rate * 100) + "%\n" +
-        "Thưởng cơ bản: " + formatMoney(baseReward) + "\n" +
-        "KPI: " + kpi + "%\n" +
-        "Hệ số KPI: " + factor + " lần\n" +
-        "TỔNG THƯỞNG DỰ KIẾN: " + formatMoney(totalReward);
-
-      resultCard.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    }
-
-    // =====================================================
-    // 9. NÚT TÍNH THƯỞNG
-    // =====================================================
-
-    calculateBtn.addEventListener("click", calculateReward);
-
-    // =====================================================
-    // 10. NÚT LÀM MỚI
-    // =====================================================
-
-    resetBtn.addEventListener("click", function () {
-      document.getElementById("rewardForm").reset();
-
-      clearError();
-      resultCard.classList.remove("show");
-      lastResultText = "";
-
-      amountInput.focus();
-    });
-
-    // =====================================================
-    // 11. NÚT SAO CHÉP KẾT QUẢ
-    // =====================================================
-
-    copyBtn.addEventListener("click", async function () {
-      clearError();
-
-      if (!lastResultText) {
-        showError("Bạn cần bấm TÍNH THƯỞNG trước khi sao chép kết quả.");
-        return;
-      }
-
-      try {
-        await navigator.clipboard.writeText(lastResultText);
-        copyBtn.textContent = "✓ Đã sao chép";
-
-        setTimeout(function () {
-          copyBtn.textContent = "📋 Sao chép kết quả";
-        }, 1800);
-      } catch (error) {
-        // Phương án dự phòng trên trình duyệt không hỗ trợ clipboard.
-        const textarea = document.createElement("textarea");
-        textarea.value = lastResultText;
-        textarea.style.position = "fixed";
-        textarea.style.opacity = "0";
-
-        document.body.appendChild(textarea);
-        textarea.select();
-
-        const copied = document.execCommand("copy");
-        document.body.removeChild(textarea);
-
-        if (copied) {
-          copyBtn.textContent = "✓ Đã sao chép";
-
-          setTimeout(function () {
-            copyBtn.textContent = "📋 Sao chép kết quả";
-          }, 1800);
-        } else {
-          showError("Không thể sao chép tự động. Vui lòng thử lại.");
-        }
-      }
-    });
-  </script>
+    <div class="field">
+      <label for="coef1">Hệ số giai đoạn</label>
+      <input id="coef1" type="number" min="0" step="0.1" value="1">
+    </div>
+  </div>
+  <div class="hint">Ví dụ banner: hệ số trước thu lý bằng 1.</div>
+</div>
+
+<div class="stage">
+  <div class="stage-title">GIAI ĐOẠN 2 · SAU THU LÝ, TRƯỚC THA</div>
+  <div class="grid">
+    <div class="field full">
+      <label for="amount2">Số thu tính incentive (VNĐ)</label>
+      <input id="amount2" inputmode="numeric" value="800,000,000">
+    </div>
+    <div class="field">
+      <label for="coef2">Hệ số giai đoạn</label>
+      <input id="coef2" type="number" min="0" step="0.1" value="0.5">
+    </div>
+  </div>
+  <div class="hint">Ví dụ banner: hệ số sau thu lý bằng 0,5.</div>
+</div>
+
+<div class="actions">
+  <button class="primary" id="calculate">TÍNH THƯỞNG DỰ KIẾN</button>
+  <button class="secondary" id="reset" type="button">ĐẶT LẠI</button>
+</div>
+</div>
+
+<div class="card">
+<h2>02 · Tỷ lệ thưởng theo DPD</h2>
+<table>
+<thead>
+<tr><th>Nhóm DPD</th><th>Trước thu lý</th><th>Sau thu lý</th></tr>
+</thead>
+<tbody>
+<tr><td>DPD ≥ 150 ngày</td><td>1,6%</td><td>2,0%</td></tr>
+<tr><td>DPD trên 150 – đến 540 ngày</td><td>4,8%</td><td>7,0%</td></tr>
+<tr><td>DPD trên 540 ngày</td><td>5,5%</td><td>8,0%</td></tr>
+</tbody>
+</table>
+
+<div class="formula">
+<b>Công thức tính thưởng:</b><br>
+Incentive = Số thu tính incentive × Tỷ lệ thưởng × Hệ số hoàn thành KPI × Hệ số giai đoạn.
+</div>
+</div>
+</section>
+
+<section>
+<div class="card">
+<h2>03 · Kết quả tính thưởng</h2>
+
+<div class="big">
+  <div class="caption">TỔNG INCENTIVE DỰ KIẾN</div>
+  <div class="amount" id="total">51,600,000 ₫</div>
+  <div class="caption" id="capText">Mức trần tham khảo: 100,000,000 ₫</div>
+</div>
+
+<div class="metrics">
+  <div class="metric">
+    <span>Thưởng trước thu lý</span>
+    <strong id="result1">13,200,000 ₫</strong>
+  </div>
+  <div class="metric">
+    <span>Thưởng sau thu lý</span>
+    <strong id="result2">38,400,000 ₫</strong>
+  </div>
+  <div class="metric">
+    <span>Tổng số thu</span>
+    <strong id="sumAmount">1,000,000,000 ₫</strong>
+  </div>
+  <div class="metric">
+    <span>Hệ số hoàn thành KPI</span>
+    <strong id="kpiFactor">1.20</strong>
+  </div>
+</div>
+
+<table>
+<thead><tr><th>Chi tiết</th><th>Số tiền</th></tr></thead>
+<tbody>
+<tr><td>Incentive giai đoạn 1</td><td id="detail1">13,200,000 ₫</td></tr>
+<tr><td>Incentive giai đoạn 2</td><td id="detail2">38,400,000 ₫</td></tr>
+<tr class="total-row"><td>Tổng trước trần</td><td id="beforeCap">51,600,000 ₫</td></tr>
+<tr class="total-row"><td>Tổng sau trần</td><td id="afterCap">51,600,000 ₫</td></tr>
+</tbody>
+</table>
+
+<div class="note" id="notice">
+Kết quả minh họa theo thông tin nhập vào. Vui lòng kiểm tra điều kiện chính sách chính thức.
+</div>
+</div>
+
+<div class="card">
+<h2>04 · Hệ số hoàn thành KPI</h2>
+<table>
+<thead><tr><th>Mức hoàn thành KPI</th><th>Hệ số</th></tr></thead>
+<tbody>
+<tr><td>≥ 150%</td><td>1,20</td></tr>
+<tr><td>≥ 120% đến dưới 150%</td><td>1,10</td></tr>
+<tr><td>≥ 100% đến dưới 120%</td><td>1,00</td></tr>
+<tr><td>≥ 90% đến dưới 100%</td><td>0,60</td></tr>
+<tr><td>≥ 80% đến dưới 90%</td><td>0,50</td></tr>
+<tr><td>≥ 40% đến dưới 80%</td><td>0,50</td></tr>
+<tr><td>Dưới 40%</td><td>0</td></tr>
+</tbody>
+</table>
+<div class="hint">
+Mức trần đọc từ ảnh: KPI ≥150% là 100 triệu; KPI từ 120% đến dưới 150% là 50 triệu. Các mức trần còn lại cần đối chiếu chính sách gốc; web đang dùng giá trị tạm tính, không nên dùng làm căn cứ chốt thưởng.
+</div>
+</div>
+</section>
+</div>
+
+<footer>
+CÔNG CỤ TÍNH THƯỞNG THAM KHẢO · Kết quả chỉ có giá trị ước tính.<br>
+Đối chiếu văn bản chính sách VPBank hiện hành trước khi chốt số.
+</footer>
+</main>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+
+function money(n) {
+  return Math.round(n).toLocaleString("en-US") + " ₫";
+}
+
+function readMoney(value) {
+  const n = Number(String(value).replace(/[^\d.-]/g, ""));
+  return Number.isFinite(n) ? Math.max(0, n) : 0;
+}
+
+function getKpiInfo(kpi) {
+  if (kpi >= 150) return { factor: 1.20, cap: 100000000 };
+  if (kpi >= 120) return { factor: 1.10, cap: 50000000 };
+  if (kpi >= 100) return { factor: 1.00, cap: 40000000 };
+  if (kpi >= 90)  return { factor: 0.60, cap: 30000000 };
+  if (kpi >= 80)  return { factor: 0.50, cap: 25000000 };
+  if (kpi >= 40)  return { factor: 0.50, cap: 15000000 };
+  return { factor: 0, cap: 0 };
+}
+
+function getRates(dpd) {
+  if (dpd === "150") return { before: 0.016, after: 0.020 };
+  if (dpd === "540") return { before: 0.048, after: 0.070 };
+  return { before: 0.055, after: 0.080 };
+}
+
+function calculate() {
+  const kpi = Math.max(0, Number($("kpi").value) || 0);
+  const amount1 = readMoney($("amount1").value);
+  const amount2 = readMoney($("amount2").value);
+  const coef1 = Math.max(0, Number($("coef1").value) || 0);
+  const coef2 = Math.max(0, Number($("coef2").value) || 0);
+
+  const info = getKpiInfo(kpi);
+  const rates = getRates($("dpd").value);
+
+  const reward1 = amount1 * rates.before * info.factor * coef1;
+  const reward2 = amount2 * rates.after * info.factor * coef2;
+  const beforeCap = reward1 + reward2;
+  const afterCap = Math.min(beforeCap, info.cap);
+
+  $("result1").textContent = money(reward1);
+  $("result2").textContent = money(reward2);
+  $("detail1").textContent = money(reward1);
+  $("detail2").textContent = money(reward2);
+  $("sumAmount").textContent = money(amount1 + amount2);
+  $("kpiFactor").textContent = info.factor.toFixed(2);
+  $("beforeCap").textContent = money(beforeCap);
+  $("afterCap").textContent = money(afterCap);
+  $("total").textContent = money(afterCap);
+  $("capText").textContent = "Mức trần đang áp dụng: " + money(info.cap);
+
+  if (beforeCap > info.cap) {
+    $("notice").textContent =
+      "Tổng thưởng tính theo công thức vượt mức trần đang cài đặt. Kết quả đã giới hạn ở " +
+      money(info.cap) + ". Hãy xác minh mức trần này theo chính sách chính thức.";
+  } else {
+    $("notice").textContent =
+      "Đã tính theo nhóm DPD, số thu, hệ số giai đoạn và hệ số KPI đã nhập. Đây là kết quả tham khảo.";
+  }
+}
+
+function formatMoneyInput(input) {
+  input.value = readMoney(input.value).toLocaleString("en-US");
+}
+
+["amount1", "amount2"].forEach(id => {
+  const input = $(id);
+
+  input.addEventListener("focus", () => {
+    input.value = String(readMoney(input.value));
+  });
+
+  input.addEventListener("blur", () => {
+    formatMoneyInput(input);
+  });
+
+  input.addEventListener("input", calculate);
+});
+
+["kpi", "dpd", "coef1", "coef2"].forEach(id => {
+  $(id).addEventListener("input", calculate);
+  $(id).addEventListener("change", calculate);
+});
+
+$("calculate").addEventListener("click", calculate);
+
+$("reset").addEventListener("click", () => {
+  $("kpi").value = 150;
+  $("dpd").value = "541";
+  $("amount1").value = "200000000";
+  $("amount2").value = "800000000";
+  $("coef1").value = 1;
+  $("coef2").value = 0.5;
+
+  formatMoneyInput($("amount1"));
+  formatMoneyInput($("amount2"));
+  calculate();
+});
+
+formatMoneyInput($("amount1"));
+formatMoneyInput($("amount2"));
+calculate();
+</script>
 </body>
 </html>
